@@ -124,6 +124,7 @@ export function AppLayout({ section }: AppProps): ReactElement {
   const {
     walletBalance,
     setWalletBalance,
+    walletCode,
     icCharacterName,
     setIcCharacterName,
     profileImageDataUrl,
@@ -438,8 +439,8 @@ export function AppLayout({ section }: AppProps): ReactElement {
             ) : (
               <div className="account-fields">
                 <div className="account-row wallet-summary">
-                  <span className="muted">Account ID</span>
-                  <span className="wallet-id">{sessionUser.id}</span>
+                  <span className="muted">Wallet Code</span>
+                  <span className="wallet-id">{walletCode ?? '—'}</span>
                 </div>
                 <div className="account-row wallet-summary">
                   <span className="muted">IBAN</span>

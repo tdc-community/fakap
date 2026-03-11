@@ -1,13 +1,13 @@
 import { ConflictException, NotFoundException, ServiceUnavailableException, UnauthorizedException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import { validate } from 'class-validator';
+import { ValidationError, validate } from 'class-validator';
 import { ExternalDepositController } from './external-deposit.controller';
 import { ExternalDepositDto } from './dto/external-deposit.dto';
 import { WalletService } from './wallet.service';
 
 describe('ExternalDepositController', () => {
   const baseDto: ExternalDepositDto = {
-    accountId: 'user_1',
+    walletCode: 'FP-1234567',
     amount: 500,
     deposit_id: 'dep_001',
   };
@@ -15,7 +15,7 @@ describe('ExternalDepositController', () => {
   function makeController(options?: {
     apiKey?: string | null;
     ingestResult?:
-      | { status: 'accepted'; idempotent: boolean; accountIdentifier: string; newBalance: string }
+      | { status: 'accepted'; idempotent: boolean; walletCode: string; newBalance: string }
       | { status: 'conflict' }
       | { status: 'unknown_account' };
   }): ExternalDepositController {
@@ -24,7 +24,7 @@ describe('ExternalDepositController', () => {
         options?.ingestResult ?? {
           status: 'accepted',
           idempotent: false,
-          accountIdentifier: 'user_1',
+          walletCode: 'FP-1234567',
           newBalance: '900.00',
         },
       ),
@@ -46,7 +46,7 @@ describe('ExternalDepositController', () => {
     expect(result).toEqual({
       status: 'accepted',
       idempotent: false,
-      accountIdentifier: 'user_1',
+      walletCode: 'FP-1234567',
       amount: 500,
       depositId: 'dep_001',
       newBalance: '900.00',
@@ -58,7 +58,7 @@ describe('ExternalDepositController', () => {
       ingestResult: {
         status: 'accepted',
         idempotent: true,
-        accountIdentifier: 'user_1',
+        walletCode: 'FP-1234567',
         newBalance: '900.00',
       },
     });
@@ -96,11 +96,12 @@ describe('ExternalDepositController', () => {
 
   it('validates invalid amount with DTO rules', async () => {
     const invalid = new ExternalDepositDto();
-    invalid.accountId = 'user_1';
+    invalid.walletCode = 'BAD-1';
     invalid.deposit_id = 'dep_bad';
     invalid.amount = 0;
 
     const errors = await validate(invalid);
-    expect(errors.some((err) => err.property === 'amount')).toBe(true);
+    expect(errors.some((err: ValidationError) => err.property === 'amount')).toBe(true);
+    expect(errors.some((err: ValidationError) => err.property === 'walletCode')).toBe(true);
   });
 });

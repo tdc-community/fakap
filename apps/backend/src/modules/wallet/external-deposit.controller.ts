@@ -12,7 +12,7 @@ import { ConfigService } from '@nestjs/config';
 import { ExternalDepositDto } from './dto/external-deposit.dto';
 import { WalletService } from './wallet.service';
 
-@Controller('api')
+@Controller()
 export class ExternalDepositController {
   constructor(
     private readonly walletService: WalletService,
@@ -27,7 +27,7 @@ export class ExternalDepositController {
   ): Promise<{
     status: 'accepted';
     idempotent: boolean;
-    accountIdentifier: string;
+    walletCode: string;
     amount: number;
     depositId: string;
     newBalance?: string;
@@ -54,7 +54,7 @@ export class ExternalDepositController {
     return {
       status: 'accepted',
       idempotent: result.idempotent,
-      accountIdentifier: result.accountIdentifier,
+      walletCode: result.walletCode,
       amount: dto.amount,
       depositId: dto.deposit_id,
       newBalance: result.newBalance,

@@ -22,7 +22,7 @@ export class WalletService {
     | {
         status: 'accepted';
         idempotent: boolean;
-        accountIdentifier: string;
+        walletCode: string;
         newBalance: string;
       }
     | {
@@ -34,13 +34,13 @@ export class WalletService {
   > {
     const amount = this.toMoneyAmount(dto.amount);
     return this.walletRepository.ingestExternalDeposit({
-      accountIdentifier: dto.accountId,
+      walletCode: dto.walletCode,
       amount,
       depositId: dto.deposit_id,
     });
   }
 
-  async getBalanceForUser(userId: string): Promise<{ accountIdentifier: string; balance: string }> {
+  async getBalanceForUser(userId: string): Promise<{ walletCode: string; balance: string }> {
     return this.walletRepository.getBalanceByAccountIdentifier(userId);
   }
 
@@ -65,7 +65,7 @@ export class WalletService {
   }
 
   async withdraw(userId: string, dto: WithdrawDto): Promise<{
-    accountIdentifier: string;
+    walletCode: string;
     amount: number;
     status: 'accepted' | 'rejected';
     reason?: string;
@@ -78,7 +78,7 @@ export class WalletService {
     const bankAccountIdRaw = user?.bankAccountId?.trim() ?? '';
     if (!bankAccountIdRaw) {
         return {
-          accountIdentifier: account.accountIdentifier,
+          walletCode: account.walletCode,
           amount,
           status: 'rejected',
           reason: 'missing_bank_account_id',
@@ -88,7 +88,7 @@ export class WalletService {
     const bankAccountId = Number(bankAccountIdRaw);
     if (!Number.isFinite(bankAccountId)) {
         return {
-          accountIdentifier: account.accountIdentifier,
+          walletCode: account.walletCode,
           amount,
           status: 'rejected',
           reason: 'invalid_bank_account_id',
@@ -98,7 +98,7 @@ export class WalletService {
     const deducted = await this.walletRepository.subtractBalance(account.id, amount);
     if (!deducted.ok) {
         return {
-          accountIdentifier: account.accountIdentifier,
+          walletCode: account.walletCode,
           amount,
           status: 'rejected',
           reason: 'insufficient_balance',
@@ -148,7 +148,7 @@ export class WalletService {
         note: 'withdrawal_provider_unreachable_revert',
       });
       return {
-        accountIdentifier: account.accountIdentifier,
+        walletCode: account.walletCode,
         amount,
         status: 'rejected',
         reason: 'provider_unreachable',
@@ -166,7 +166,7 @@ export class WalletService {
         note: 'withdrawal_provider_revert',
       });
       return {
-        accountIdentifier: account.accountIdentifier,
+        walletCode: account.walletCode,
         amount,
         status: 'rejected',
         reason: 'provider_rejected',
@@ -174,7 +174,7 @@ export class WalletService {
     }
 
     return {
-      accountIdentifier: account.accountIdentifier,
+      walletCode: account.walletCode,
       amount,
       status: 'accepted',
       newBalance: deducted.balance,
