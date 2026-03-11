@@ -1,9 +1,10 @@
-import { IsNumber, IsString, MaxLength, Min } from 'class-validator';
+import { IsNumber, IsString, Matches, MaxLength, Min } from 'class-validator';
 
 export class ExternalDepositDto {
   @IsString()
-  @MaxLength(64)
-  accountId!: string;
+  @MaxLength(10)
+  @Matches(/^FP-\d{7}$/)
+  walletCode!: string;
 
   @IsNumber({ maxDecimalPlaces: 2 })
   @Min(0.01)
@@ -13,4 +14,3 @@ export class ExternalDepositDto {
   @MaxLength(128)
   deposit_id!: string;
 }
-

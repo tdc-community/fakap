@@ -15,7 +15,6 @@ export type WalletTransaction = {
 };
 
 export async function getWalletTransactions(input: {
-  accountIdentifier: string;
   accessToken: string;
 }): Promise<WalletTransaction[]> {
   const response = await fetch(`${getApiBase()}/wallet/transactions`, {

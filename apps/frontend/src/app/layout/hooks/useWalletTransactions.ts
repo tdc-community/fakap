@@ -32,7 +32,6 @@ export function useWalletTransactions(input: {
       setTxState('loading');
       try {
         const transactions = await getWalletTransactions({
-          accountIdentifier: input.sessionUser.id,
           accessToken,
         });
         const sorted = [...transactions].sort((a, b) => Date.parse(b.timestamp) - Date.parse(a.timestamp));

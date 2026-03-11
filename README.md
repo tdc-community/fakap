@@ -70,7 +70,7 @@ Payload:
 
 ```json
 {
-  "accountId": "<wallet account identifier>",
+  "walletCode": "FP-1234567",
   "amount": 500.00,
   "deposit_id": "dep_20260307_001"
 }
@@ -89,7 +89,7 @@ Sample curl:
 curl -X POST http://localhost/api/deposit \
   -H "Content-Type: application/json" \
   -H "X-API-Key: replace_me_deposit_secret" \
-  -d '{"accountId":"user_123","amount":500,"deposit_id":"dep_001"}'
+  -d '{"walletCode":"FP-1234567","amount":500,"deposit_id":"dep_001"}'
 ```
 
 Success response example:
@@ -98,7 +98,7 @@ Success response example:
 {
   "status": "accepted",
   "idempotent": false,
-  "accountIdentifier": "user_123",
+  "walletCode": "FP-1234567",
   "amount": 500,
   "depositId": "dep_001",
   "newBalance": "1500.00"

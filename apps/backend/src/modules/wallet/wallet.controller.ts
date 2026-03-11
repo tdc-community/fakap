@@ -18,7 +18,7 @@ export class WalletController {
 
   @UseGuards(BearerAuthGuard)
   @Get('balance')
-  async balance(@Req() req: AuthedRequest): Promise<{ accountIdentifier: string; balance: string }> {
+  async balance(@Req() req: AuthedRequest): Promise<{ walletCode: string; balance: string }> {
     const userId = req.auth?.userId;
     if (!userId) {
       throw new UnauthorizedException('Missing principal');
@@ -51,7 +51,7 @@ export class WalletController {
   @UseGuards(BearerAuthGuard)
   @Post('withdraw')
   withdraw(@Req() req: AuthedRequest, @Body() dto: WithdrawDto): Promise<{
-    accountIdentifier: string;
+    walletCode: string;
     amount: number;
     status: 'accepted' | 'rejected';
     reason?: string;

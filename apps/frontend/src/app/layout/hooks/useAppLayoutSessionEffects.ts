@@ -13,6 +13,7 @@ import {
 export function useAppLayoutSessionEffects(sessionUser: SessionUser | null): {
   walletBalance: string | null;
   setWalletBalance: Dispatch<SetStateAction<string | null>>;
+  walletCode: string | null;
   icCharacterName: string;
   setIcCharacterName: Dispatch<SetStateAction<string>>;
   profileImageDataUrl: string | null;
@@ -21,6 +22,7 @@ export function useAppLayoutSessionEffects(sessionUser: SessionUser | null): {
   setBankAccountId: Dispatch<SetStateAction<string>>;
 } {
   const [walletBalance, setWalletBalance] = useState<string | null>(null);
+  const [walletCode, setWalletCode] = useState<string | null>(null);
   const [icCharacterName, setIcCharacterName] = useState('');
   const [profileImageDataUrl, setProfileImageDataUrl] = useState<string | null>(null);
   const [bankAccountId, setBankAccountId] = useState('');
@@ -29,20 +31,24 @@ export function useAppLayoutSessionEffects(sessionUser: SessionUser | null): {
     const run = async (): Promise<void> => {
       if (!sessionUser) {
         setWalletBalance(null);
+        setWalletCode(null);
         return;
       }
 
       const { accessToken } = getStoredTokens();
       if (!accessToken) {
         setWalletBalance(null);
+        setWalletCode(null);
         return;
       }
 
       try {
         const wallet = await getWalletBalance(accessToken);
         setWalletBalance(wallet.balance);
+        setWalletCode(wallet.walletCode);
       } catch {
         setWalletBalance(null);
+        setWalletCode(null);
       }
     };
 
@@ -58,6 +64,7 @@ export function useAppLayoutSessionEffects(sessionUser: SessionUser | null): {
   return {
     walletBalance,
     setWalletBalance,
+    walletCode,
     icCharacterName,
     setIcCharacterName,
     profileImageDataUrl,

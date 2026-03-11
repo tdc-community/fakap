@@ -256,7 +256,7 @@ export async function logout(accessToken: string, refreshToken: string): Promise
   });
 }
 
-export async function getWalletBalance(accessToken: string): Promise<{ accountIdentifier: string; balance: string }> {
+export async function getWalletBalance(accessToken: string): Promise<{ walletCode: string; balance: string }> {
   const response = await fetch(`${getApiBase()}/wallet/balance`, {
     headers: {
       Authorization: `Bearer ${accessToken}`,
@@ -265,7 +265,7 @@ export async function getWalletBalance(accessToken: string): Promise<{ accountId
   if (!response.ok) {
     throw new Error('Could not load wallet balance');
   }
-  return (await response.json()) as { accountIdentifier: string; balance: string };
+  return (await response.json()) as { walletCode: string; balance: string };
 }
 
 export async function updateProfile(
@@ -293,7 +293,7 @@ export async function requestWithdraw(
   accessToken: string,
   payload: { amount: number },
 ): Promise<{
-  accountIdentifier: string;
+  walletCode: string;
   amount: number;
   status: 'accepted' | 'rejected';
   reason?: string;
@@ -313,7 +313,7 @@ export async function requestWithdraw(
   }
 
   return (await response.json()) as {
-    accountIdentifier: string;
+    walletCode: string;
     amount: number;
     status: 'accepted' | 'rejected';
     reason?: string;
