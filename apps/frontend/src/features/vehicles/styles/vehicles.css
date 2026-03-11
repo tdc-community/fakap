@@ -1,0 +1,334 @@
+.vehicles-page {
+  display: grid;
+  gap: 1rem;
+}
+
+.vehicles-page.auth-only {
+  justify-items: center;
+}
+
+.vehicles-page.auth-only .auth-panel {
+  width: min(720px, 100%);
+}
+
+.vehicle-feed {
+  display: grid;
+  gap: 0.9rem;
+}
+
+.vehicle-feed-intro {
+  max-width: 75ch;
+  margin: 0;
+}
+
+.vehicle-image-button {
+  border: 0;
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
+  border-radius: 12px;
+}
+
+.field-textarea {
+  min-height: 110px;
+  resize: vertical;
+}
+
+.vehicle-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.75rem;
+}
+
+.vehicle-item {
+  border: 1px solid #2a2f45;
+  border-radius: 14px;
+  background: #111625;
+  display: grid;
+  grid-template-columns: 56px 220px 1fr;
+  gap: 1rem;
+  padding: 0.9rem;
+  align-items: stretch;
+}
+
+.vehicle-votes {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.15rem;
+}
+
+.vote-btn {
+  width: 32px;
+  height: 28px;
+  border: 1px solid #2a2f45;
+  background: #0d1220;
+  color: #c7cedf;
+  border-radius: 10px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: border-color 0.16s ease, color 0.16s ease, transform 0.16s ease;
+}
+
+.vote-btn:hover {
+  border-color: #3a4260;
+  color: #f4f7ff;
+}
+
+.vote-btn.active-up {
+  border-color: #7dd3fc;
+  color: #7dd3fc;
+}
+
+.vote-btn.active-down {
+  border-color: #fda4af;
+  color: #fda4af;
+}
+
+.vehicle-score {
+  min-width: 2ch;
+  text-align: center;
+  color: #eef2ff;
+}
+
+.vehicle-image {
+  width: 100%;
+  height: 100%;
+  min-height: 150px;
+  max-height: 178px;
+  object-fit: cover;
+  border-radius: 12px;
+  border: 1px solid #2a2f45;
+}
+
+.vehicle-content {
+  display: grid;
+  gap: 0.42rem;
+}
+
+.vehicle-card-tools {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.vehicle-card-remove {
+  width: 32px;
+  height: 32px;
+  border-radius: 999px;
+  border-color: #4a2424;
+  color: #f8c5c5;
+}
+
+.vehicle-card-remove:hover {
+  border-color: #7a2f2f;
+  color: #fff;
+}
+
+.vehicle-card-remove:focus-visible {
+  outline: 2px solid #8d2828;
+  outline-offset: 2px;
+}
+
+.vehicle-content h3 {
+  margin: 0;
+  font-size: 1.01rem;
+  color: #f5f7ff;
+}
+
+.vehicle-content p {
+  margin: 0;
+}
+
+.vehicle-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  font-size: 0.83rem;
+  color: #99a6c6;
+}
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.65);
+  z-index: 60;
+  display: grid;
+  place-items: center;
+  padding: 16px;
+}
+
+.modal {
+  width: min(760px, 100%);
+  max-height: calc(100vh - 40px);
+  overflow: auto;
+  border: 1px solid #2d2d2d;
+  background: #111111;
+  border-radius: 16px;
+  padding: 16px;
+  display: grid;
+  gap: 12px;
+}
+
+.modal-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.modal-head h2 {
+  margin: 0;
+}
+
+.vehicle-preview-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 10px;
+}
+
+.vehicle-preview-item {
+  position: relative;
+  border: 1px solid #2f2f2f;
+  border-radius: 10px;
+  overflow: hidden;
+  min-height: 90px;
+}
+
+.vehicle-preview-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.vehicle-preview-remove {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  width: 28px;
+  height: 28px;
+}
+
+.modal-errors {
+  min-height: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.lightbox {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.9);
+  z-index: 70;
+  display: grid;
+  place-items: center;
+  padding: 18px;
+}
+
+.lightbox-inner {
+  width: min(1200px, 100%);
+  height: min(92vh, 860px);
+  position: relative;
+  display: grid;
+  grid-template-rows: 1fr auto;
+  gap: 10px;
+}
+
+.lightbox-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 12px;
+  border: 1px solid #2f2f2f;
+  background: #090909;
+}
+
+.lightbox-close {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  z-index: 2;
+}
+
+.lightbox-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+  width: 40px;
+  height: 40px;
+}
+
+.lightbox-nav.left {
+  left: 8px;
+}
+
+.lightbox-nav.right {
+  right: 8px;
+}
+
+.lightbox-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  color: #d5d5d5;
+  font-size: 14px;
+}
+
+.fab-create-post {
+  position: fixed;
+  right: 22px;
+  bottom: 22px;
+  width: 56px;
+  height: 56px;
+  border-radius: 999px;
+  border: 1px solid #472020;
+  background: linear-gradient(180deg, #a41717, #7f1010);
+  color: #fff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 58;
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.45);
+  transition: filter 0.16s ease, transform 0.16s ease;
+}
+
+.fab-create-post:hover {
+  filter: brightness(1.07);
+  transform: translateY(-1px);
+}
+
+.fab-create-post:focus-visible {
+  outline: 2px solid #8d2828;
+  outline-offset: 2px;
+}
+
+@media (max-width: 980px) {
+  .vehicle-item {
+    grid-template-columns: 44px 1fr;
+    grid-template-areas:
+      'votes content'
+      'image image';
+  }
+
+  .vehicle-votes {
+    grid-area: votes;
+  }
+
+  .vehicle-content {
+    grid-area: content;
+  }
+
+  .vehicle-image {
+    grid-area: image;
+    max-height: 210px;
+  }
+}

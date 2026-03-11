@@ -1,0 +1,46 @@
+http:
+  routers:
+    backend_api:
+      entryPoints:
+        - websecure
+      rule: "Host(`fakaperformance.com`) && PathPrefix(`/api`)"
+      service: backend
+      middlewares:
+        - backend_strip_api_prefix
+      priority: 100
+      tls:
+        certResolver: myresolver
+
+    backend_oauth:
+      entryPoints:
+        - websecure
+      rule: "Host(`fakaperformance.com`) && PathPrefix(`/auth/discord`)"
+      service: backend
+      priority: 99
+      tls:
+        certResolver: myresolver
+
+    frontend:
+      entryPoints:
+        - websecure
+      rule: "Host(`fakaperformance.com`) && PathPrefix(`/`)"
+      service: frontend
+      priority: 1
+      tls:
+        certResolver: myresolver
+
+  services:
+    backend:
+      loadBalancer:
+        servers:
+          - url: "http://fakap-backend:3000"
+    frontend:
+      loadBalancer:
+        servers:
+          - url: "http://fakap-frontend:5173"
+
+  middlewares:
+    backend_strip_api_prefix:
+      stripPrefix:
+        prefixes:
+          - "/api"

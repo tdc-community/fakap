@@ -1,0 +1,185 @@
+.wallet-pill {
+  border: 1px solid #3f2a2a;
+  background: #1a1111;
+  color: #ffdede;
+  border-radius: 8px;
+  padding: 6px 10px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.wallet-link {
+  border: 1px solid #2f2f2f;
+  color: #efefef;
+}
+
+.wallet-link:hover {
+  border-color: #3a3a3a;
+  background: #1b1b1b;
+}
+
+.wallet-summary {
+  border: 1px solid #242424;
+  background: #111111;
+  border-radius: 10px;
+  padding: 12px;
+}
+
+.wallet-id {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 11px;
+  color: #d6d6d6;
+  max-width: 360px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.wallet-iban-wrap {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.wallet-iban-toggle {
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  padding: 0;
+  text-align: right;
+}
+
+.wallet-iban-toggle:hover {
+  color: #f0f0f0;
+}
+
+.wallet-iban-edit {
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+}
+
+.wallet-iban-input {
+  min-width: 180px;
+  max-width: 260px;
+}
+
+.wallet-iban-btn {
+  height: 32px;
+  padding: 0 10px;
+  font-size: 11px;
+}
+
+.wallet-iban-message {
+  font-size: 12px;
+  margin-top: -4px;
+}
+
+.wallet-iban-message.ok {
+  color: #88d788;
+}
+
+.wallet-iban-message.error {
+  color: #ff8787;
+}
+
+.tx-log {
+  margin-top: 8px;
+  border: 1px solid #242424;
+  border-radius: 14px;
+  background: #0f0f0f;
+  padding: 14px;
+}
+
+.tx-log-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.tx-log-head h3 {
+  margin: 0;
+  font-size: 16px;
+}
+
+.tx-filter {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.tx-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 8px;
+}
+
+.tx-item {
+  border: 1px solid #242424;
+  border-radius: 10px;
+  background: #111111;
+  padding: 10px 12px;
+  display: grid;
+  gap: 8px;
+}
+
+.tx-main,
+.tx-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.tx-hash {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  color: #dddddd;
+  font-size: 12px;
+}
+
+.tx-amount {
+  font-weight: 600;
+}
+
+.tx-direction {
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-size: 11px;
+  color: #cfcfcf;
+}
+
+.tx-status {
+  border-radius: 999px;
+  padding: 4px 8px;
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.tx-status.success {
+  border: 1px solid #1f5c2a;
+  color: #aff0bd;
+  background: #0e2213;
+}
+
+.tx-status.failed {
+  border: 1px solid #652020;
+  color: #ffb7b7;
+  background: #281010;
+}
+
+@media (max-width: 980px) {
+  .tx-log-head {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
